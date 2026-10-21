@@ -1,27 +1,33 @@
-# DataVision Analytics — TechCore
+> 🌐 **Note:** The Spanish version of this README is available as a PDF. Some content (charts, diagrams, screenshots) is easier to follow in the PDF version.
+>
+> 🌐 **Nota:** La versión en español de este README está disponible en formato PDF. Algunos contenidos (gráficas, diagramas, capturas) se ven más claros en la versión PDF.
 
-## Descripción del proyecto
+---
 
-Como parte del proceso de selección para el rol de Analista de Datos Junior, DataVision Analytics ha asignado al candidato la primera fase del proyecto para TechCore, una cadena de tiendas minoristas especializada en la venta y distribución de computadores y accesorios tecnológicos.
+# DataVision Analytics: TechCore
 
-En esta fase, el candidato debe importar la base de datos original de facturas en Power BI Desktop y realizar un proceso completo de transformación y estandarización utilizando Power Query.
+## Project Description
 
-El primer paso consiste en uniformar los nombres de las columnas (por ejemplo, cambiar Prod_Name a ProductoNombre) y asegurarse de que cada campo tenga el tipo de dato correcto: las fechas deben convertirse al formato Date, los precios a Decimal Number, y los identificadores a Text.
+As part of the selection process for the Junior Data Analyst role, DataVision Analytics assigned the candidate the first phase of the project for TechCore, a retail chain specialized in selling and distributing computers and tech accessories.
 
-Luego, es necesario detectar y tratar valores nulos, duplicados o inconsistentes. Los registros de facturas exactamente iguales deben eliminarse, y los valores faltantes deben reemplazarse según su naturaleza: si el campo MétodoPago está vacío, se completará con “No especificado”, mientras que los valores numéricos nulos se imputarán con cero cuando sea pertinente.
+In this phase, the candidate must import the original invoice database into Power BI Desktop and carry out a complete transformation and standardization process using Power Query.
 
-El proceso también incluye la normalización de categorías y campos textuales para evitar variaciones que dificulten el análisis.
+The first step is to standardize column names (for example, changing `Prod_Name` to `ProductoNombre`) and make sure each field has the correct data type: dates must be converted to Date, prices to Decimal Number, and identifiers to Text.
 
-## Objetivos
+Next, null, duplicate or inconsistent values must be detected and handled. Exactly identical invoice records must be removed, and missing values must be replaced according to their nature: if the `MétodoPago` (payment method) field is empty, it is filled with "No especificado" (not specified), while null numeric values are imputed with zero where appropriate.
 
-- Preparar los datos para su análisis.
-- Corregir inconsistencias presentes en la información.
-- Estructurar los datos de manera adecuada para el análisis.
-- Generar una fuente de datos organizada para Power BI.
-- Facilitar el análisis de las ventas, clientes, productos y demás entidades relacionadas.
-- Desarrollar una base estructurada que permitiera posteriormente construir un dashboard interactivo.
+The process also includes normalizing categories and text fields to avoid variations that make analysis harder.
 
-## Tecnologías utilizadas
+## Objectives
+
+- Prepare the data for analysis.
+- Correct inconsistencies in the information.
+- Structure the data appropriately for analysis.
+- Generate an organized data source for Power BI.
+- Facilitate analysis of sales, customers, products and other related entities.
+- Build a structured foundation that later allows an interactive dashboard to be created.
+
+## Technologies Used
 
 - Python
 - Pandas
@@ -32,110 +38,141 @@ El proceso también incluye la normalización de categorías y campos textuales 
 - Power BI Desktop
 - DAX
 
-## Datos de origen y limpieza
+## Source Data and Cleaning
 
-El dataset original contenía 30.000 registros y 30 columnas con información relacionada con ventas, clientes, productos, vendedores, ciudades, sucursales, fechas, cantidades, precios, descuentos y valores de las transacciones.
+The original dataset contained 30,000 records and 30 columns with information on sales, customers, products, salespeople, cities, branches, dates, quantities, prices, discounts and transaction values.
 
-La información se encontraba inicialmente en una estructura plana, donde los datos correspondientes a diferentes entidades aparecían dentro de los mismos registros de venta. Para poder utilizar la información de manera adecuada, primero se realizó una revisión general de la calidad de los datos y posteriormente se preparó la información para su estructuración.
+The information was initially in a flat structure, where data corresponding to different entities appeared within the same sales records. To use the information properly, a general review of data quality was done first, and the data was then prepared for structuring.
 
-Durante esta etapa se revisaron y corrigieron diferentes tipos de inconsistencias, entre ellas:
+During this stage, different types of inconsistencies were reviewed and corrected, including:
 
-- Tipos de datos incorrectos.
-- Valores nulos.
-- Registros duplicados.
-- Inconsistencias en campos numéricos.
-- Diferencias de escritura en campos de texto.
-- Nombres de productos y marcas.
-- Nombres de ciudades y sucursales.
-- Mayúsculas y minúsculas.
-- Acentos.
-- Espacios innecesarios.
-- Formatos de fechas y horas.
+- Incorrect data types.
+- Null values.
+- Duplicate records.
+- Inconsistencies in numeric fields.
+- Spelling differences in text fields.
+- Product and brand names.
+- City and branch names.
+- Upper and lower case.
+- Accents.
+- Unnecessary spaces.
+- Date and time formats.
 
-Entre las principales correcciones se normalizaron ciudades como:
+Among the main corrections, cities were normalized, for example:
 
-```
-cali → Cali
-pereira → Pereira
-Bogota → Bogotá
-bogota → Bogotá
-Medellin → Medellín
-medellin → Medellín
-```
+- `cali` → `Cali`
+- `pereira` → `Pereira`
+- `Bogota` → `Bogotá`
+- `bogota` → `Bogotá`
+- `Medellin` → `Medellín`
+- `medellin` → `Medellín`
 
-También se estandarizaron marcas con errores de escritura, por ejemplo:
+Brands with spelling errors were also standardized, for example:
 
-```
-Aple → Apple
-Samsng → Samsung
-Lenvo → Lenovo
-Acr → Acer
-Azus → Asus
-Del → Dell
-HPP → HP
-```
+- `Aple` → `Apple`
+- `Samsng` → `Samsung`
+- `Lenvo` → `Lenovo`
+- `Acr` → `Acer`
+- `Azus` → `Asus`
+- `Del` → `Dell`
+- `HPP` → `HP`
 
-También se encontraron diferencias en los nombres de sucursales, ocasionadas por variaciones en mayúsculas, acentos y espacios, que fueron corregidas para evitar que una misma entidad apareciera como diferentes registros durante el análisis.
+Differences in branch names caused by variations in capitalization, accents and spaces were also found and corrected, so that the same entity would not appear as different records during analysis.
 
-Como parte de la preparación temporal, se incorporaron dos campos adicionales relacionados con la fecha y el año, necesarios para facilitar posteriormente el análisis cronológico en Power BI.
+As part of the temporary preparation, two additional fields related to date and year were added to make later chronological analysis in Power BI easier.
 
-La preparación de los datos no se limitó a una única herramienta. Después de la preparación inicial, también se realizaron ajustes adicionales en Power Query dentro de Power BI cuando fue necesario corregir formatos o tipos de datos para que determinados campos pudieran utilizarse correctamente.
+Data preparation was not limited to a single tool. After the initial preparation, additional adjustments were made in Power Query inside Power BI when formats or data types needed correcting so that certain fields could be used properly.
 
 ## Python
 
-Una vez preparados los datos, Python se utilizó principalmente para organizar y estructurar la información, no para reemplazar el proceso de limpieza realizado previamente.
+Once the data was prepared, Python was used mainly to organize and structure the information, not to replace the cleaning process done earlier.
 
-El código tomó el dataset preparado y permitió separar la información en una estructura organizada para representar las diferentes entidades del negocio, evitando mantener toda la información repetida dentro de una única tabla plana.
+The code took the prepared dataset and split the information into an organized structure representing the different business entities, avoiding repeating all the information inside a single flat table.
 
-Mediante este proceso se preparó la información necesaria para representar clientes, ciudades, vendedores, productos y transacciones, además de organizar la información correspondiente a las facturas y sus respectivos detalles.
+Through this process, the information needed to represent customers, cities, salespeople, products and transactions was prepared, along with the information for invoices and their respective line items.
 
-Python también permitió generar identificadores para relacionar las diferentes entidades y preparar una estructura que pudiera ser utilizada posteriormente como fuente de datos en Power BI.
+Python also generated identifiers to relate the different entities and prepared a structure that could later be used as a data source in Power BI.
 
-Otro propósito importante del código fue automatizar la generación de la fuente de datos final, evitando tener que construir manualmente las diferentes tablas cada vez que se necesitara reproducir el modelo.
+Another important purpose of the code was to automate the generation of the final data source, avoiding having to build the different tables manually each time the model needed to be reproduced.
 
-Las principales herramientas utilizadas fueron:
+Main tools used:
 
-- pandas para manipulación y transformación de datos.
-- numpy para operaciones numéricas.
-- tabulate para presentar resultados de las tablas durante la ejecución.
-- sqlite3 para generar una copia del modelo en una base de datos SQLite.
+- `pandas` for data manipulation and transformation.
+- `numpy` for numeric operations.
+- `tabulate` to present table results during execution.
+- `sqlite3` to generate a copy of the model in a SQLite database.
 
-Como resultado del proceso de preparación y estructuración se generó el archivo:
+The preparation and structuring process produced the file:
 
-**modeloVentas.xlsx**
+**`modeloVentas.xlsx`**
 
-El archivo modeloVentas.xlsx estaba compuesto por siete tablas principales, organizadas para representar las diferentes entidades del modelo: Clientes, Ciudades, Facturas, DetalleFacturas, Productos, Sucursales y Vendedores. La tabla Clientes contenía la información e identificación de los clientes; Ciudades almacenaba el identificador y nombre de cada ciudad; Facturas contenía la información general de cada venta, como factura, cliente, fecha, hora y vendedor; DetalleFacturas registraba los productos asociados a cada factura, junto con cantidad, precio unitario, subtotal y descuento; Productos contenía el identificador, nombre, marca y precio de los productos; Sucursales relacionaba cada sucursal con su ciudad; y Vendedores contenía el identificador y nombre de los vendedores. Esta organización permitió llevar la información desde una estructura de ventas plana hacia un modelo relacionado que pudiera ser utilizado correctamente en Power BI.
+The `modeloVentas.xlsx` file consisted of seven main tables, organized to represent the different entities of the model:
 
-> **[Imagen del PDF: diagrama del modelo relacional en Power BI, con las tablas Ciudades, Sucursales, Facturas, Vendedores, DetalleFacturas, Productos y Clientes y sus relaciones.]**
+| Table | Content |
+|---|---|
+| **Clientes** (Customers) | Customer information and identification. |
+| **Ciudades** (Cities) | Identifier and name of each city. |
+| **Facturas** (Invoices) | General information for each sale: invoice, customer, date, time and salesperson. |
+| **DetalleFacturas** (Invoice Details) | Products associated with each invoice, with quantity, unit price, subtotal and discount. |
+| **Productos** (Products) | Product identifier, name, brand and price. |
+| **Sucursales** (Branches) | Relates each branch to its city. |
+| **Vendedores** (Salespeople) | Salesperson identifier and name. |
 
-## Modelo entidad-relación
+This organization moved the information from a flat sales structure to a related model that could be used properly in Power BI.
 
-Después de preparar los datos, la información se organizó en un modelo relacional dentro de Power BI. El modelo conecta las diferentes entidades mediante identificadores, permitiendo relacionar la información geográfica, comercial, de clientes, vendedores y productos con las transacciones realizadas.
+## Entity-Relationship Model
 
-La tabla de ciudades se relaciona con las sucursales, permitiendo asociar cada punto de venta con su respectiva ciudad. Las sucursales se relacionan con las facturas, mientras que las facturas contienen la información general de cada transacción y se relacionan con los clientes y vendedores correspondientes.
+> **Figure (see PDF):** the relational model in Power BI, showing the tables Ciudades, Sucursales, Facturas, DetalleFacturas, Productos, Vendedores and Clientes with their relationships.
 
-Cada factura puede contener uno o varios registros en la tabla de detalle de facturas. Esta tabla almacena la información específica de los productos vendidos, incluyendo cantidad, precio unitario, subtotal y descuento. A su vez, cada registro de detalle se relaciona con la tabla de productos, que contiene la información descriptiva de cada producto.
+After preparing the data, the information was organized into a relational model within Power BI. The model connects the different entities through identifiers, making it possible to relate geographic, commercial, customer, salesperson and product information to the transactions carried out.
 
-Esta estructura permite separar la información descriptiva de la información transaccional, reducir la repetición de datos y facilitar el análisis mediante las relaciones establecidas entre las diferentes entidades.
+The cities table relates to the branches, allowing each point of sale to be associated with its city. Branches relate to invoices, while invoices hold the general information of each transaction and relate to the corresponding customers and salespeople.
 
-> **[Imagen del PDF: captura del dashboard "DASHBOARD DE VENTAS | TECHCORE – Resumen ejecutivo de desempeño comercial", con filtros de Ciudad, Marca, Año/Mes/Fecha y Edad; tarjetas de Ventas Totales (COP 468.03bn), Ticket Promedio (COP 15.60M) y Productos Vendidos (COP 90.01K); gráficos de evolución mensual, ventas por marca, ventas por ciudad (mapa) y ventas por año; tabla por ciudad (Medellín, Bogotá, Pereira, Cali) y sección de insights: "Medellín lidera las ventas con 44.68% del total", "Medellín y Bogotá concentran el 75.25% de las ventas", "Lenovo es la marca con mayor volumen de ventas".]**
+Each invoice can contain one or more records in the invoice details table. This table stores the specific information about the products sold, including quantity, unit price, subtotal and discount. In turn, each detail record relates to the products table, which holds the descriptive information of each product.
 
-## Dashboard final
+This structure separates descriptive information from transactional information, reduces data repetition, and makes analysis easier through the relationships established between the different entities.
 
-El dashboard fue diseñado como un panel ejecutivo para facilitar la consulta y el análisis del desempeño comercial de TechCore. Se organizó mediante una estructura visual clara, con los principales indicadores en la parte superior y las herramientas de filtrado disponibles para modificar dinámicamente la información mostrada.
+## Final Dashboard
 
-Se incorporaron tarjetas con los indicadores de Ventas Totales, Ticket Promedio y Productos Vendidos, proporcionando una vista rápida de los principales resultados del modo.
+> **Figure (see PDF):** screenshot of the "Sales Dashboard | TechCore" executive summary in Power BI.
 
-El análisis visual incluye la evolución mensual de las ventas, el comportamiento de las ventas por marca, la distribución geográfica mediante un mapa por ciudad, y la comparación de ventas por año. También se incorporó una tabla de desempeño por ciudad que reúne ventas totales, participación porcentual, productos vendidos y ticket promedio.
+The dashboard was designed as an executive panel to make it easier to consult and analyze TechCore's commercial performance. It uses a clear visual structure, with the main indicators at the top and the filtering tools available to dynamically change the information displayed.
 
-El dashboard cuenta con segmentadores para Ciudad, Marca, Año/Mes/Fecha y Edad, permitiendo filtrar los diferentes elementos de forma interactiva.
+Cards were added for the indicators Total Sales, Average Ticket and Products Sold, giving a quick view of the main results.
 
-Para el análisis de edad se utilizaron rangos de cinco años, comenzando en 15–19 años, seguido de 20–24, 25–29 y así sucesivamente. Esta agrupación facilita la segmentación de los clientes sin presentar una cantidad excesiva de categorías individuales.
+The visual analysis includes monthly sales evolution, sales by brand, geographic distribution through a map by city, and a year-over-year sales comparison. A performance table by city was also added, combining total sales, percentage share, products sold and average ticket.
 
-Finalmente, se incorporó una sección de insights para presentar de forma resumida los principales hallazgos obtenidos a partir del análisis. El diseño utiliza una distribución organizada, tarjetas independientes, bordes redondeados, colores diferenciados para los indicadores y espacios definidos entre los elementos, buscando mantener una presentación clara y orientada al análisis empresarial.
+The dashboard has slicers for City, Brand, Year/Month/Date and Age, allowing the different elements to be filtered interactively.
 
-## Conclusión
+For the age analysis, five-year ranges were used, starting at 15–19 years, followed by 20–24, 25–29 and so on. This grouping makes customer segmentation easier without presenting an excessive number of individual categories.
 
-El proyecto permitió convertir información comercial en una herramienta de análisis orientada a facilitar la interpretación y toma de decisiones. La solución final integra diferentes perspectivas del negocio en un entorno interactivo, permitiendo explorar los resultados de forma dinámica según distintos criterios.
+Headline figures shown in the dashboard:
 
-La organización de los indicadores y visualizaciones facilita una lectura rápida del desempeño y permite profundizar en los datos cuando sea necesario. De esta manera, el resultado final combina claridad, interactividad y utilidad analítica, proporcionando una base sólida para apoyar futuros análisis y procesos de Business Intelligence en TechCore.
+| Indicator | Value |
+|---|---|
+| Total Sales | COP 468.03bn |
+| Average Ticket | COP 15.60M |
+| Products Sold | 90.01K |
+
+Performance by city (from the dashboard table):
+
+| City | Share of Sales |
+|---|---|
+| Medellín | 44.68% |
+| Bogotá | 30.57% |
+| Pereira | 12.41% |
+| Cali | 12.34% |
+
+Key insights shown in the dashboard:
+
+- Medellín leads sales with 44.68% of the total.
+- Medellín and Bogotá together account for 75.25% of sales.
+- Lenovo is the brand with the highest sales volume.
+
+Finally, an insights section was included to present the main findings of the analysis in summary form. The design uses an organized layout, independent cards, rounded borders, differentiated colors for the indicators and defined spacing between elements, aiming for a clear presentation focused on business analysis.
+
+## Conclusion
+
+The project turned commercial information into an analysis tool oriented toward facilitating interpretation and decision making. The final solution integrates different perspectives of the business in an interactive environment, allowing results to be explored dynamically by different criteria.
+
+The organization of the indicators and visualizations allows for quick reading of performance and makes it possible to drill into the data when needed. In this way, the final result combines clarity, interactivity and analytical usefulness, providing a solid base to support future analyses and Business Intelligence processes at TechCore.
